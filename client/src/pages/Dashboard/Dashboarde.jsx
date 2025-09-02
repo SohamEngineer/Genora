@@ -2,7 +2,7 @@ import React from 'react'
 
 function Dashboarde() {
   return (
-    <div>Dashboarde</div>
+    <div className='text-white'>Dashboarde</div>
   )
 }
 
