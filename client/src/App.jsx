@@ -1,20 +1,21 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Home from './pages/Home/home'
-import Blog from './pages/Blog/Blog'
-import Dashboarde from './pages/Dashboard/Dashboarde'
-import RemoveBackground from './pages/RemoveBackground/RemoveBackground'
-import RemoveObject from './pages/RemoveObject/RemoveObject'
-import ReviewResume from './pages/ReviewResume/ReviewResume'
-import WriteArtical from './pages/WriteArtical/WriteArtical'
-import Community from './pages/Community/Community'
-import GenerateImage from './pages/GenerateImages/GenerateImage'
-import Layout from './pages/Layout/Layout'
+import Blog from './pages/blog/blog'
+import Dashboarde from './pages/dashboard/dashboarde'
+import RemoveBackground from './pages/removeBackground/removeBackground'
+import RemoveObject from './pages/removeObject/removeObject'
+import ReviewResume from './pages/reviewResume/reviewResume'
+import WriteArtical from './pages/writeArtical/writeArtical'
+import Community from './pages/community/community'
+import GenerateImage from './pages/generateImages/generateImage'
+import Layout from './pages/layout/layout'
+import Home from './pages/Home/Home'
+// import Home from './pages/home/home'
 
 const App = () => {
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path='/' element={<Home/>} />
       
       <Route path="/ai" element={<Layout />}>
         <Route index element={<Dashboarde />} />
