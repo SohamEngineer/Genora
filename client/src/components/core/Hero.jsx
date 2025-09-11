@@ -16,6 +16,7 @@ const Hero = ({people,words}) => {
     >
       {/* Background Boxes */}
       <Boxes />
+      
 
       {/* Content on top of background */}
       <div className="relative text-center mb-6">

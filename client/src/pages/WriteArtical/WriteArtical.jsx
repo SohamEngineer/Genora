@@ -24,19 +24,22 @@ function WriteArtical() {
     }, 2000);
   };
   return (
-    <div className='h-full overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-salte-800'>
+    <>
+    {/* Animated black gradient background */}
+      <div className="animated-bg"></div>
+    <div className='h-full overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-light fade-in-up'>
       {/* left col */}
-      <form   onSubmit={onSubmitHandler} className='w-full  max-w-lg p-4 bg-white rounded-xl border border-gray-300'>
-        <div className='flex gap-3 items-center '>
-          <Sparkles className='w-5 text-[#4A7AFF] ' />
+      <form   onSubmit={onSubmitHandler} className='w-full  max-w-lg p-4  rounded-xl border border-gray-300'>
+        <div className='flex gap-3 items-center  fade-in-up fade-delay-1'>
+          <Sparkles className='w-5 text-[#4A7AFF] fade-in-up fade-delay-2' />
           <h1> Title Generator</h1>
         </div>
-        <p className='mt-6 text-sm font-semibold mb-2'>Artical Topic</p>
-        <input onChange={(e)=>setInput(e.target.value)} value={input} type='text' placeholder="The future of artificial intelligence" className='w-full py-3 px-3 outline-none text-sm rounded-md border border-gray-300' required>
+        <p className='mt-6 text-sm font-semibold mb-2 fade-in-up fade-delay-3'>Artical Topic</p>
+        <input onChange={(e)=>setInput(e.target.value)} value={input} type='text' placeholder="The future of artificial intelligence" className='w-full py-3 px-3 outline-none text-sm rounded-md border border-gray-300 fade-in-up fade-delay-5' required>
 
         </input>
-        <h3 className='mt-4 text-sm font-semibold'>Article Length</h3>
-        <div className='mt-3 flex gap-3 flex-wrap sm:max-w-full'>
+        <h3 className='mt-4 text-sm font-semibold fade-in-up fade-delay-4'>Article Length</h3>
+        <div className='mt-3 flex gap-3 flex-wrap sm:max-w-full fade-in-up fade-delay-5'>
           {articleLength.map((item,idx)=>(
             <span onClick={()=>setSelectedLength(item)}  className={`text-sm border rounded-full px-4 py-2 cursor-pointer ${selectedLength.text===item.text?'bg-blue-50 bg-gradient-to-l from-[#FCE00D] via-[#097973] to-[#00D4FF] text-white':'text-gray-500 border-gray-300'}`} key={idx}>{item.text}</span>
           ))}
@@ -48,7 +51,7 @@ function WriteArtical() {
       disabled={loading}
       className={`w-full flex justify-center items-center gap-2 
         bg-gradient-to-r from-[#FCE00D] via-[#097973] to-[#00D4FF]  text-white 
-        px-4 py-2 mt-6 text-sm rounded-lg cursor-pointer 
+        px-4 py-2 mt-6 text-sm rounded-lg cursor-pointer fade-in-up fade-delay-6 
         `}
     >
       {/* Left Loader */}
@@ -62,20 +65,21 @@ function WriteArtical() {
       </form>
 
       {/* Right col */}
-      <div className='w-full max-w-lg p-4 bg-white rounded-lg flex flex-col border border-gray-300 min-h-96 max-h-[600px]'>
-      <div className='flex items-center gap-3'>
+      <div className='w-full max-w-lg p-4  rounded-lg flex flex-col border border-gray-300 min-h-96 max-h-[600px]'>
+      <div className='flex items-center gap-3 fade-in-up fade-delay-7'>
         <Edit className='w-6 h-6 text-[#4A7AFF]'/>
         <h1 className='text-xl font-semibold'>Generated Article</h1>
       </div>
 
       <div className='flex-1 flex justify-center items-center'>
-        <div className='text-sm flex flex-col items-center gap-5 text-gray-400'>
-          <Edit className='w-9 h-9 '/>
+        <div className='text-sm flex flex-col items-center gap-5 text-gray-400 fade-in-up fade-delay-8'>
+          <Edit className='w-9 h-9 fade-in-up fade-delay-9 '/>
           <p>Enter a topic and click "Generatee article" to get started</p>
         </div>
       </div>
       </div>
     </div>
+    </>
   )
 }
 

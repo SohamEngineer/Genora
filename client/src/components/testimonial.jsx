@@ -1,4 +1,5 @@
 import React from "react";
+import { CardSpotlight } from "./Spotlight";
 
 const StarIcon = () => (
   <svg
@@ -31,20 +32,23 @@ export const Testimonial = ({ testimonials }) => {
         {testimonials.map((t, i) => (
           <div
             key={i}
-            className="w-full border border-gray-200 pb-6 rounded-lg bg-white shadow-[0px_4px_15px_0px] shadow-black/5 mt-10"
+            className="w-full border border-gray-700 pb-6 rounded-lg shadow-[0px_4px_15px_0px] shadow-black/5 mt-10 relative"
           >
-            <div className="flex flex-col items-center px-5 py-4 relative ">
+            {/* ✅ Spotlight added */}
+            <CardSpotlight className="absolute inset-0" />
+
+            <div className="flex flex-col items-center px-5 py-4 ">
               <img
                 className="h-24 w-24 absolute -top-14 rounded-full object-cover"
                 src={t.src}
                 alt={t.name}
               />
               <div className="pt-8 text-center">
-                <h1 className="text-lg font-medium text-gray-800">{t.name}</h1>
-                <p className="text-gray-800/80">{t.designation}</p>
+                <h1 className="text-lg font-medium text-gray-300">{t.name}</h1>
+                <p className="text-gray-300">{t.designation}</p>
               </div>
             </div>
-            <p className="text-gray-500 px-6 text-center">{t.quote}</p>
+            <p className="text-gray-500 px-6 text-center ">{t.quote}</p>
             <div className="flex justify-center pt-4">
               <div className="flex gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -55,7 +59,6 @@ export const Testimonial = ({ testimonials }) => {
           </div>
         ))}
       </div>
-
     </div>
   );
 };

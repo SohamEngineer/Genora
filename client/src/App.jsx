@@ -9,8 +9,7 @@ import WriteArtical from './pages/writeArtical/writeArtical'
 import Community from './pages/community/community'
 import GenerateImage from './pages/generateImages/generateImage'
 import Layout from './pages/layout/layout'
-import Home from './pages/Home/Home'
-// import Home from './pages/home/home'
+import Home from './pages/home/home'
 
 const App = () => {
   return (

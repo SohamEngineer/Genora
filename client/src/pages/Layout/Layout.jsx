@@ -24,9 +24,9 @@ const Layout = () => {
           
         ): <Menu onClick={() => setSidebar(true)} className='w-6 h-6 text-white sm:hidden cursor-pointer'/>}
       </nav>
-        <div className='flex-1 w-full flex h-[calc(100vh-64px)]'>
+        <div className='flex-1 w-full flex h-[calc(100vh-64px)] '>
         <Sideber sidebar={sidebar} setSidebar={setSidebar}/>
-        <div className='flex-1 bg-black'>
+        <div className='flex-1  '>
       <Outlet />
         </div>
          </div>
