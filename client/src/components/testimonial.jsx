@@ -32,18 +32,18 @@ export const Testimonial = ({ testimonials }) => {
         {testimonials.map((t, i) => (
           <div
             key={i}
-            className="w-full border border-gray-700 pb-6 rounded-lg shadow-[0px_4px_15px_0px] shadow-black/5 mt-10 relative"
+            className="w-full border border-gray-700 pb-6 rounded-lg  shadow-black/5 mt-10 relative"
           >
             {/* ✅ Spotlight added */}
-            <CardSpotlight className="absolute inset-0" />
+            <CardSpotlight className="absolute inset-0 " />
 
-            <div className="flex flex-col items-center px-5 py-4 ">
+            <div className="flex flex-col items-center px-5 py-4  ">
               <img
                 className="h-24 w-24 absolute -top-14 rounded-full object-cover"
                 src={t.src}
                 alt={t.name}
               />
-              <div className="pt-8 text-center">
+              <div className="pt-8 text-center ">
                 <h1 className="text-lg font-medium text-gray-300">{t.name}</h1>
                 <p className="text-gray-300">{t.designation}</p>
               </div>

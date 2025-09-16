@@ -56,7 +56,7 @@ function Dashboarde() {
       key={item.id}
       item={item}
       style={{
-        animationDelay: `${index * 150}ms`, // 150ms delay between each
+        animationDelay: `${index * 200}ms`,
       }}
       className="fade-in-up"
     />
