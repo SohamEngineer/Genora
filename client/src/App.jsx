@@ -10,8 +10,18 @@ import Community from './pages/community/community'
 import GenerateImage from './pages/generateImages/generateImage'
 import Layout from './pages/layout/layout'
 import Home from './pages/home/home'
+import { useAuth } from '@clerk/clerk-react'
+import { useEffect } from 'react'
 
 const App = () => {
+const {getToken}=useAuth();
+useEffect(()=>{
+  getToken().then((token)=>{
+    console.log(token);
+    
+  })
+})
+
   return (
     <Routes>
       <Route path='/' element={<Home/>} />
