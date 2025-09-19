@@ -38,7 +38,7 @@ const Hero = ({people,words}) => {
       </button>
         <button className="p-[3px] relative group cursor-pointer">
   <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg transition-opacity duration-300 group-hover:opacity-100 opacity-80" />
-  <div className="px-8 py-2 bg-black text-white rounded-[6px] relative z-10 group-hover:bg-transparent transition duration-200 font-bold">
+  <div className="px-8 py-2 bg-black text-white rounded-[6px] relative  group-hover:bg-transparent transition duration-200 font-bold">
     Watch Demo
   </div>
 </button>

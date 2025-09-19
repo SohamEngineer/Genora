@@ -95,3 +95,7 @@ body {
   animation-delay: 0.9s;
 }
 
+
+.no-scrollber::-webkit-scrollbar{
+  display:none;
+}
