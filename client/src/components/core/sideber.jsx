@@ -20,7 +20,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
 
   return (
     <div
-      className={`w-70 bg-black border-r shadow-xl border-gray-600 flex flex-col justify-between items-center max-sm:absolute top-14 bottom-0  text-white
+      className={`w-70 bg-black border-r shadow-xl border-gray-600 flex flex-col justify-between items-center max-sm:absolute top-14 bottom-0  text-white z-20 overflow-y-scroll no-scrollber
       ${sidebar ? 'translate-x-0' : 'max-sm:-translate-x-full'} 
       transition-all duration-300 ease-in-out`}
     >
@@ -33,7 +33,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
         <h1 className="mt-1 text-center text-white">{user?.fullName}</h1>
 
         <div className="mt-6 flex flex-col gap-1 px-4 text-lg font-semibold">
-          {navItem.map(({ to, label, icon: Icon }) => (
+          {navItem.map(({ to, label, icon }) => (
             <NavLink
               key={to}
               to={to}
@@ -46,7 +46,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
             >
               {({ isActive }) => (
                 <>
-                  <Icon className={`w-5 h-5 font-semibold text-xl ${isActive ? "text-white" : ""}`} />
+                  {React.createElement(icon, { className: `w-5 h-5 font-semibold text-xl ${isActive ? "text-white" : ""}` })}
                   {label}
                 </>
               )}
@@ -54,18 +54,20 @@ const Sidebar = ({ sidebar, setSidebar }) => {
           ))}
         </div>
       </div>
-      <div className='w-full border-t border-white p-4 px-7 flex item-center justify-between'>
-          <div className='flex gap-2 items-center cursor-pointer' onClick={openUserProfile}>
-            <img src={user.imageUrl} className='w-8 rounded-full'/>
-            <div>
-              <h1 className=' text-lg font-semibold'>{user.fullName}</h1>
-              <p className='text-xs text-gray-300'>
-                <Protect plan='premium' fallback="Free  " >Premium </Protect>
-                  Plan
-              </p>
-            </div>
+      <div className='w-full  border-t border-white p-4 px-7 flex item-center justify-between'>
+        <div className='flex gap-2 items-center cursor-pointer' onClick={openUserProfile}>
+          <img src={user.imageUrl} className='w-8 rounded-full' />
+          <div>
+            <h1 className=' text-lg font-semibold'>{user.fullName}</h1>
+            <p className="text-xs text-gray-300">
+              {/* {user.publicMetadata.plan === "subscription" ? "Premium Plan" : "Free Plan"} */}
+              <Protect plan='subscription' fallback="Free Plan">Premium Plan</Protect>
+            </p>
+
+
           </div>
-    <LogOut onClick={signOut} className='w-4.5 text-white hover:text-gray-700 transition cursor-pointer'/>
+        </div>
+        <LogOut onClick={signOut} className='w-4.5 text-white hover:text-gray-700 transition cursor-pointer' />
       </div>
 
     </div>

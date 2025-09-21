@@ -4,8 +4,7 @@ import 'dotenv/config';
 const app=express();
 const PORT= 3500;
 import { clerkMiddleware ,requireAuth} from '@clerk/express'
-import article from "./routes/articaleRoute.js";
-
+import article from "./routes/aiRoute.js";
 // Middleware
 app.use(cors());
 app.use(express.json());
