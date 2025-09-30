@@ -3,14 +3,8 @@ import { Edit, Sparkles } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-
+import articleLength from '../../data/articleLength';
 function WriteArtical() {
-  const articleLength = [
-    { length: 800, text: 'Short (500-800 words)' },
-    { length: 1200, text: 'Medium (800-1600 words)' },
-    { length: 1600, text: 'Long (1600++ words)' }
-  ];
-
   const [selectedLength, setSelectedLength] = useState(articleLength[0]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);

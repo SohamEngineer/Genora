@@ -1,18 +1,9 @@
 import React, { useState } from "react";
 import { Hash, Sparkles } from "lucide-react";
+import BLOG_CATEGORIES from "../../data/blogCatagore";
 
 function Blog() {
-  /* -------------------- Constants -------------------- */
-  const BLOG_CATEGORIES = [
-    "General",
-    "Technology",
-    "Business",
-    "Health",
-    "Lifestyle",
-    "Education",
-    "Travel",
-    "Food",
-  ];
+
 
   /* -------------------- State -------------------- */
   const [selectedCategory, setSelectedCategory] = useState(BLOG_CATEGORIES[0]); // Selected blog category

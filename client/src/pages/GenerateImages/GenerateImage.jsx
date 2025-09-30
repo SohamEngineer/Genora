@@ -1,18 +1,8 @@
 import React, { useState } from "react";
 import { Image, Sparkles } from "lucide-react";
+import IMAGE_STYLES from "../../data/imegeStyle";
 
 function GenerateImage() {
-  /* -------------------- Constants -------------------- */
-  const IMAGE_STYLES = [
-    "Realistic",
-    "Ghibli Style",
-    "Anime Style",
-    "Cartoon Style",
-    "Fantasy Style",
-    "3D Style",
-    "Portrait style",
-  ];
-
   /* -------------------- State -------------------- */
   const [selectStyle, setSelectStyle] = useState("Realistic"); // Selected image style
   const [input, setInput] = useState(""); // User prompt for image generation
