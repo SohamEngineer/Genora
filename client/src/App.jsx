@@ -10,19 +10,12 @@ import Community from './pages/community/community'
 import GenerateImage from './pages/generateImages/generateImage'
 import Layout from './pages/layout/layout'
 import Home from './pages/home/home'
-import { useAuth } from '@clerk/clerk-react'
-import { useEffect } from 'react'
+import {Toaster} from 'react-hot-toast'
 
 const App = () => {
-const {getToken}=useAuth();
-useEffect(()=>{
-  getToken().then((token)=>{
-    console.log(token);
-    
-  })
-})
-
   return (
+    <>
+    <Toaster/>
     <Routes>
       <Route path='/' element={<Home/>} />
       
@@ -37,6 +30,7 @@ useEffect(()=>{
         <Route path='write-article' element={<WriteArtical />} />
       </Route>
     </Routes>
+    </>
   )
 }
 

@@ -5,6 +5,7 @@ const app=express();
 const PORT= 3500;
 import { clerkMiddleware ,requireAuth} from '@clerk/express'
 import article from "./routes/aiRoute.js";
+import userCreation from "./routes/userRoutes.js";
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 
 app.use(requireAuth())
 app.use("/api/ai",article);
+app.use("/api/user",userCreation);
 
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}  `);
