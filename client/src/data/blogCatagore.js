@@ -8,3 +8,4 @@
     "Travel",
     "Food",
   ];
+  export default BLOG_CATEGORIES

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import articleLength from '../../data/articleLength';
+
 function WriteArtical() {
   const [selectedLength, setSelectedLength] = useState(articleLength[0]);
   const [input, setInput] = useState('');
@@ -94,7 +95,7 @@ function WriteArtical() {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !input}
             className={`w-full flex justify-center items-center gap-2 
               bg-gradient-to-r from-[#FCE00D] via-[#097973] to-[#00D4FF] text-white 
               px-4 py-2 mt-6 text-sm rounded-lg cursor-pointer`}

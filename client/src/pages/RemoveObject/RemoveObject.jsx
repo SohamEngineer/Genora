@@ -66,7 +66,7 @@ function RemoveObject() {
         {/* Action Button */}
         <button
           onClick={handleClick}
-          disabled={loading}
+          disabled={loading || !input}
           className="w-full flex justify-center items-center gap-2 
           bg-gradient-to-r from-[#FD1D1D] to-[#45FCA7] text-white 
           px-4 py-2 mt-6 text-sm rounded-lg cursor-pointer fade-in-up fade-delay-7"
