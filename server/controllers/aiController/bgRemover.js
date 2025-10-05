@@ -6,7 +6,7 @@ import cloudinary from "../../config/cloudInary.js";
 export const bgRemover = async (req, res) => {
   try {
     const { userId } = req.auth();
-    const { image} = req.file;
+    const image = req.file;
     const plan=req.plan;
 
     //uplode cloudnary
