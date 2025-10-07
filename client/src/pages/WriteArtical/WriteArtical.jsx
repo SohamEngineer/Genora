@@ -3,6 +3,7 @@ import { Edit, Sparkles } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import Markdown from "react-markdown";
 import articleLength from '../../data/articleLength';
 
 function WriteArtical() {

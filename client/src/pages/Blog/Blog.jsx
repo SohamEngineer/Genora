@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Hash, Sparkles } from "lucide-react";
+import Markdown from "react-markdown";
 import BLOG_CATEGORIES from "../../data/blogCatagore";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/clerk-react";
@@ -126,7 +127,7 @@ function Blog() {
           {/* Placeholder / Result */}
           <div className="flex-1 mt-3 overflow-y-auto fade-in-up fade-delay-8">
             {content && content.trim().length > 0 ? (
-              <p className="text-sm whitespace-pre-line text-white">{content}</p>
+              <p className="text-sm whitespace-pre-line text-white"><Markdown>{content}</Markdown></p>
             ) : (
               <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
                 <Hash className="w-9 h-9 fade-in-up fade-delay-9" />

@@ -1,26 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FileText, Sparkles } from "lucide-react";
+import toast from "react-hot-toast";
+import axios from 'axios';
+import { useAuth } from "@clerk/clerk-react";
+import Markdown from "react-markdown";
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 function ReviewResume() {
   // State for storing uploaded file
   const [input, setInput] = useState(null);
-
+  const [content, setContent] = useState("");
   // State for loading spinner
   const [loading, setLoading] = useState(false);
 
+  const { getToken } = useAuth();
+
+  useEffect(() => {
+    setContent("");
+  }, [])
   // Handle form submit (prevent reload for now)
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    // Future: API call for resume analysis
+    if (!input) return;
+
+    try {
+      setLoading(true);
+      toast.loading("Analyzing your resume...");
+      
+      const formData = new FormData();
+      formData.append('resume', input);
+
+   const token = await getToken();
+
+      const response = await axios.post(
+        "/api/ai/resume-review",
+        formData,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log("Full Axios response:", response);
+
+      toast.dismiss();
+
+      if (response.data.success) {
+        setContent(response.data.content);
+
+        setInput(null);
+        toast.success("Resume Review Successfully 🎉");
+      } else {
+        toast.error(response.data.message || "Something went wrong");
+      }
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Something went wrong. Please try again.");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Simulate async analysis action
-  const handleClick = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  };
 
   return (
     <>
@@ -56,7 +93,7 @@ function ReviewResume() {
 
           {/* Action Button */}
           <button
-            onClick={handleClick}
+
             disabled={loading}
             className="w-full flex justify-center items-center gap-2 
             bg-gradient-to-r from-[#FD1D1D] to-[#45FCA7] text-white 
@@ -78,14 +115,22 @@ function ReviewResume() {
             <FileText className="w-6 h-6 text-[#e4920f]" />
             <h1 className="text-xl font-semibold">Analysis Results</h1>
           </div>
-
-          {/* Placeholder when no resume is processed */}
-          <div className="flex-1 flex justify-center items-center fade-in-up fade-delay-9">
+            {
+              !content ?
+              (<div className="flex-1 flex justify-center items-center fade-in-up fade-delay-9">
             <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
               <FileText className="w-9 h-9" />
               <p>Upload your resume and click "Review Resume" to get started</p>
             </div>
-          </div>
+          </div>)
+              :
+              (
+                 <p className="text-sm  h-full text-white overflow-y-scroll">
+                 <Markdown>{content}</Markdown></p>
+              )
+                          }
+          
+          
         </div>
       </div>
     </>

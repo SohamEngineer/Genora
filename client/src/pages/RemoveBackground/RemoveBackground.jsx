@@ -14,6 +14,7 @@ function RemoveBackground() {
   useEffect(() => {
     setContent("");
   }, []);
+  
   const onSubmitHandler = async (e) => {
   e.preventDefault();
   if (!input) return;
@@ -24,6 +25,7 @@ function RemoveBackground() {
 
     const formData = new FormData();
     formData.append('image', input);
+
 
     const token = await getToken();
 
