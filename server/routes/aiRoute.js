@@ -15,6 +15,6 @@ article.post('/generate-blog',auth,generateBlog);
 article.post('/generate-image',auth,generateImage);
 article.post('/remove-image-background',upload.single('image'),auth,bgRemover);
 article.post('/remove-image-object',upload.single('image'),auth,objectRemover);
-article.post('/remove-image-object',upload.single('image'),auth,resumeReview);
+article.post('/resume-review',upload.single('resume'),auth,resumeReview);
  
 export default article;

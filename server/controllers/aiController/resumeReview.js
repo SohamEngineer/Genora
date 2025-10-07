@@ -1,6 +1,7 @@
 import sql from "../../config/db.js";
 import fs from "fs";
 import pdf from "pdf-parse/lib/pdf-parse.js";
+import AI from "../../config/aiClient.js";
 
 export const resumeReview = async (req, res) => {
   try {

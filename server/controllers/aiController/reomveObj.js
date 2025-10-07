@@ -7,8 +7,14 @@ export const objectRemover = async (req, res) => {
   try {
     const { userId } = req.auth();
     const { object } = req.body;
-    const { image} = req.file;
-    
+    const  image = req.file;
+     if (!image) {
+      return res.status(400).json({ success: false, message: "No image uploaded" });
+    }  
+
+     if (!object) {
+      return res.status(400).json({ success: false, message: "Object description required" });
+    }
 
     // Upload to Cloudinary
     const{public_id} = await cloudinary.uploader.upload(image.path);
