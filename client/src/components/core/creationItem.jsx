@@ -77,7 +77,7 @@ const Accordino = ({ item, expanded, onChange ,style, className}) => {
           transition: "max-height 0.3s ease",
         }}
       >
-        {item.type === "image" ? (
+        {(item.type === "ai-image" || item.type === "bg-remover") ? (
           <div>
             <img
               src={item.content}
