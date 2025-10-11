@@ -49,6 +49,7 @@ const Accordino = ({ item, expanded, onChange ,style, className}) => {
           </div>
 
           <Button
+          component="div"
             size="small"
             variant="outlined"
             sx={{

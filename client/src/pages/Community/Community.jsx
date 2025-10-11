@@ -1,23 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { useUser } from '@clerk/clerk-react';
-import { dummyPublishedCreationData } from '../../assets/assets';
+import { useAuth, useUser } from '@clerk/clerk-react';
 import { Heart } from 'lucide-react';
+import axios from 'axios';
 
 function Community() {
   const [creations, setCreations] = useState([]);
   const { user } = useUser();
+  const [loading,setLoading]=useState(false)
+  const {getToken}=useAuth();
+  axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
-  const fetchCreation = async () => {
-    setCreations(dummyPublishedCreationData);
-  };
+    const getcommunity = async () => {
+    setLoading(true);
+    try {
+      const token = await getToken();
+      const { data } = await axios.get("/api/user/getuserPublication", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    
+    if (data.success) setCreations(data.creations);
+  } catch (error) {
+    console.log(error);
+  }finally{
+    setLoading(false)
+  }
+};
 
   useEffect(() => {
-    if (user) {
-      fetchCreation();
-    }
-  }, [user]);
+   getcommunity();
+  }, []);
 
   return (
+    <>
+     {loading ? (
+<div className="flex justify-center items-center h-screen">
+  <div className="w-15 h-15 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+</div>
+      ) : (
+
     <div className="flex-1 h-full flex flex-col gap-4 p-6 text-white">
       <h2 className="text-xl font-semibold">Creations</h2>
 
@@ -54,6 +74,8 @@ function Community() {
         ))}
       </div>
     </div>
+    )}
+    </>
   );
 }
 
