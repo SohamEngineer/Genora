@@ -1,80 +1,114 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth, useUser } from '@clerk/clerk-react';
-import { Heart } from 'lucide-react';
-import axios from 'axios';
+"use client";
+import React, { useEffect, useState } from "react";
+import { useAuth, useUser } from "@clerk/clerk-react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import ImageCard from "../../components/imageCard";
+// import ImageCard from "@/components/ImageCard";
 
 function Community() {
   const [creations, setCreations] = useState([]);
   const { user } = useUser();
-  const [loading,setLoading]=useState(false)
-  const {getToken}=useAuth();
+  const [loading, setLoading] = useState(false);
+  const { getToken } = useAuth();
+  const [hovered, setHovered] = useState(null);
+
   axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
-    const getcommunity = async () => {
+  // ✅ Fetch all community creations
+  const getCommunity = async () => {
     setLoading(true);
+    const toastId = toast.loading("Loading community creations...");
     try {
       const token = await getToken();
       const { data } = await axios.get("/api/user/getuserPublication", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    
-    if (data.success) setCreations(data.creations);
-  } catch (error) {
-    console.log(error);
-  }finally{
-    setLoading(false)
-  }
-};
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (data.success) {
+        setCreations(data.creations);
+        toast.success("Creations loaded successfully!");
+      } else {
+        toast.error(data.message || "Failed to load creations.");
+      }
+    } catch (error) {
+      toast.error("Something went wrong while fetching data.", error);
+    } finally {
+      toast.dismiss(toastId);
+      setLoading(false);
+    }
+  };
+
+  // ✅ Like/unlike creation
+  const toggleLike = async (id) => {
+    try {
+      const token = await getToken();
+      const { data } = await axios.post(
+        "/api/user/getuserLike",
+        { id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+        setCreations((prev) =>
+          prev.map((item) =>
+            item.id === id
+              ? {
+                  ...item,
+                  likes: item.likes.includes(user?.id)
+                    ? item.likes.filter((u) => u !== user?.id)
+                    : [...item.likes, user?.id],
+                }
+              : item
+          )
+        );
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong while liking the post.", error);
+    }
+  };
 
   useEffect(() => {
-   getcommunity();
+    getCommunity();
   }, []);
 
   return (
     <>
-     {loading ? (
-<div className="flex justify-center items-center h-screen">
-  <div className="w-15 h-15 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-</div>
-      ) : (
-
-    <div className="flex-1 h-full flex flex-col gap-4 p-6 text-white">
-      <h2 className="text-xl font-semibold">Creations</h2>
-
-      <div className="h-full w-full rounded-xl overflow-y-scroll grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {creations.map((creation, index) => (
-          <div
-            key={index}
-            className="relative group rounded-lg overflow-hidden"
-          >
-            <img
-              src={creation.content}
-              alt={`creation-${index}`}
-              className="w-full h-full object-cover rounded-lg"
-            />
-
-            {/* Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-end p-3 
-              bg-gradient-to-t from-black/80 via-black/20 to-transparent 
-              opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              
-              <p className="text-sm text-gray-200 mb-2">{creation.prompt}</p>
-
-              <div className="flex gap-1 items-end">
-                <p className="text-sm">{creation.likes.length}</p>
-                <Heart
-                  className={`w-5 h-5 cursor-pointer transition-transform duration-200 hover:scale-110 
-                    ${creation.likes.includes(user?.id) 
-                      ? 'fill-red-500 text-red-500' 
-                      : 'text-white'}`}
-                />
-              </div>
-            </div>
+      {loading ? (
+        <div className="flex justify-center items-center h-screen text-white">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-sm text-gray-300">Fetching creations...</p>
           </div>
-        ))}
-      </div>
-    </div>
-    )}
+        </div>
+      ) : (
+        <div className="flex-1 h-full flex flex-col gap-4 p-6 text-white">
+          <h2 className="text-2xl font-bold mb-3">Community Creations</h2>
+
+          {creations.length === 0 ? (
+            <p className="text-gray-400 text-center mt-10">
+              No creations found yet. Be the first to share!
+            </p>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 overflow-y-auto h-full pr-2">
+              {creations.map((card, index) => (
+                <ImageCard
+                  key={card.id}
+                  card={card}
+                  index={index}
+                  hovered={hovered}
+                  setHovered={setHovered}
+                  user={user}
+                  toggleLike={toggleLike}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 }

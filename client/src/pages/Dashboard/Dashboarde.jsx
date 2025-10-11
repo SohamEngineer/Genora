@@ -4,6 +4,7 @@ import { Gem, Sparkles } from 'lucide-react';
 import { Protect, useAuth } from '@clerk/clerk-react';
 import Accordino from '../../components/core/creationItem';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 function Dashboarde() {
   const [creations, setCreations] = useState([]);
   const [loading,setLoading]=useState(false)
@@ -12,14 +13,17 @@ function Dashboarde() {
   
   const getDashboardData = async () => {
     setLoading(true);
+    toast.loading("Generating Creations");
+
     try {
       const token = await getToken();
       const { data } = await axios.get("/api/user/getuserCreation", {
       headers: { Authorization: `Bearer ${token}` },
     });
+    toast.dismiss()
     if (data.success) setCreations(data.creations);
   } catch (error) {
-    console.log(error);
+      toast.error("somthing error in the api",error);
   }finally{
     setLoading(false)
   }

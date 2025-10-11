@@ -29,33 +29,38 @@ export const getPublishData = async (req, res) => {
 };
 export const getLike = async (req, res) => {
   try {
-    const {userId}=req.auth();
-    const {id}=req.body;
-    const [creation]=await sql `SELECT *FROM usercreations WHERE id=${id}`
-    if(!creation){
-      return res.json({success:false, message:"Creation not found"})
-    }
-    const currentLikes=creation.likes;
-    const userIdStr=userId.toString();
-    let updateLikes;
+    const { userId } = req.auth;
+    const { id } = req.body;
+
+    const [creation] = await sql`SELECT * FROM usercreations WHERE id=${id}`;
+    if (!creation) return res.json({ success: false, message: "Creation not found" });
+
+    // Ensure likes is an array
+    const currentLikes = Array.isArray(creation.likes)
+      ? creation.likes
+      : creation.likes ? creation.likes.replace(/[{}]/g, '').split(',') : [];
+
+    const userIdStr = userId.toString();
+    let updatedLikes;
     let message;
-    if(currentLikes.includes(userIdStr)){
-      updateLikes=currentLikes.filter((user)=>user !==userIdStr);
-      message='Creation Unliked'
-    }
-    else{
-      updateLikes=[...currentLikes,userIdStr]
-      message='Creation Liked'
+
+    if (currentLikes.includes(userIdStr)) {
+      updatedLikes = currentLikes.filter((u) => u !== userIdStr);
+      message = "Creation Unliked";
+    } else {
+      updatedLikes = [...currentLikes, userIdStr];
+      message = "Creation Liked";
     }
 
-    const formattedArray=`{${updateLikes.json(',')}}`;
-    await sql `UPDATE usercreation SET likes=${formattedArray}::text[] WHERE id=${id}`
+    const formattedArray = `{${updatedLikes.join(',')}}`;
+    await sql`UPDATE usercreations SET likes=${formattedArray}::text[] WHERE id=${id}`;
 
     res.json({ success: true, message });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
 };
+
 
 
 
