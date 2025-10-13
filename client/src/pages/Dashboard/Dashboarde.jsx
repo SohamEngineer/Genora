@@ -3,13 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { Gem, Sparkles } from 'lucide-react';
 import { Protect, useAuth } from '@clerk/clerk-react';
 import Accordino from '../../components/core/creationItem';
-import axios from 'axios';
 import toast from 'react-hot-toast';
+import api from '../../api';
 function Dashboarde() {
   const [creations, setCreations] = useState([]);
   const [loading,setLoading]=useState(false)
   const {getToken}=useAuth();
-  axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
   
   const getDashboardData = async () => {
     setLoading(true);
@@ -17,7 +16,7 @@ function Dashboarde() {
 
     try {
       const token = await getToken();
-      const { data } = await axios.get("/api/user/getuserCreation", {
+      const { data } = await api.get("/api/user/getuserCreation", {
       headers: { Authorization: `Bearer ${token}` },
     });
     toast.dismiss()

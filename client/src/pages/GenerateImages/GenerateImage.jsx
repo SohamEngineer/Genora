@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Image, Sparkles } from "lucide-react";
 import IMAGE_STYLES from "../../data/imegeStyle";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/clerk-react";
-
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
+import api from "../../api";
 
 function GenerateImage() {
   /* -------------------- State -------------------- */
@@ -33,7 +31,7 @@ function GenerateImage() {
       const prompt = `Generate an image of ${input} in the style ${selectStyle}`;
       const token = await getToken();
 
-      const response = await axios.post(
+      const response = await api.post(
         "/api/ai/generate-image",
         { prompt, publish },
         { headers: { Authorization: `Bearer ${token}` } }
@@ -42,9 +40,8 @@ function GenerateImage() {
       console.log(token);
       setContent(response.data.url || "");
       setInput("");
-
       toast.dismiss();
-      toast.success("Image generated successfully 🎉");
+      toast.success(response.message);
     } catch (error) {
       toast.dismiss();
       toast.error("Something went wrong. Please try again.");
@@ -94,10 +91,9 @@ function GenerateImage() {
                 key={idx}
                 onClick={() => setSelectStyle(item)}
                 className={`text-sm border rounded-full px-4 py-2 cursor-pointer transition fade-in-up fade-delay-5
-                  ${
-                    selectStyle === item
-                      ? "bg-gradient-to-l from-[#e4920f] to-[#45FCA7] text-white"
-                      : "text-gray-500 border-gray-300"
+                  ${selectStyle === item
+                    ? "bg-gradient-to-l from-[#e4920f] to-[#45FCA7] text-white"
+                    : "text-gray-500 border-gray-300"
                   }`}
               >
                 {item}

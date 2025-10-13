@@ -4,7 +4,7 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ImageCard from "../../components/imageCard";
-// import ImageCard from "@/components/ImageCard";
+import api from "../../api";
 
 function Community() {
   const [creations, setCreations] = useState([]);
@@ -43,7 +43,7 @@ function Community() {
   const toggleLike = async (id) => {
     try {
       const token = await getToken();
-      const { data } = await axios.post(
+      const { data } = await api.post(
         "/api/user/getuserLike",
         { id },
         { headers: { Authorization: `Bearer ${token}` } }

@@ -1,10 +1,10 @@
 import { useAuth } from '@clerk/clerk-react';
 import { Edit, Sparkles } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import Markdown from "react-markdown";
 import articleLength from '../../data/articleLength';
+import api from '../../api';
 
 function WriteArtical() {
   const [selectedLength, setSelectedLength] = useState(articleLength[0]);
@@ -12,8 +12,6 @@ function WriteArtical() {
   const [loading, setLoading] = useState(false);
   const [content, setContent] = useState('');
   const { getToken } = useAuth();
-
-  axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
   // Reset article when component mounts (refresh)
   useEffect(() => {
@@ -29,7 +27,7 @@ function WriteArtical() {
       const prompt = `Write an article about ${input} in ${selectedLength.text}`;
 
       const token = await getToken();
-      const response = await axios.post(
+      const response = await api.post(
         '/api/ai/generate-article',
         { prompt, length: selectedLength.length },
         { headers: { Authorization: `Bearer ${token}` } }
@@ -119,8 +117,9 @@ function WriteArtical() {
 
           <div className="flex-1 mt-3 overflow-y-auto">
             {content && content.trim().length > 0 ? (
-              <p className="text-sm whitespace-pre-line text-white"><Markdown>{content}</Markdown>
-              </p>
+              <div className="text-sm whitespace-pre-line text-white">
+              <Markdown>{content}</Markdown>
+              </div>
             ) : (
               <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
                 <Edit className="w-9 h-9" />

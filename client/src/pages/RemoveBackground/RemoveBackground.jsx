@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Eraser, Sparkles } from 'lucide-react'
 import toast from 'react-hot-toast';
 import { useAuth } from '@clerk/clerk-react';
-import axios from 'axios';
+import api from '../../api';
 
 function RemoveBackground() {
   const [input, setInput] = useState(null);
@@ -14,45 +14,45 @@ function RemoveBackground() {
   useEffect(() => {
     setContent("");
   }, []);
-  
+
   const onSubmitHandler = async (e) => {
-  e.preventDefault();
-  if (!input) return;
+    e.preventDefault();
+    if (!input) return;
 
-  try {
-    setLoading(true);
-    toast.loading("Generating image...");
+    try {
+      setLoading(true);
+      toast.loading("Generating image...");
 
-    const formData = new FormData();
-    formData.append('image', input);
+      const formData = new FormData();
+      formData.append('image', input);
 
 
-    const token = await getToken();
+      const token = await getToken();
 
-    const response = await axios.post(
-      "/api/ai/remove-image-background",
-      formData,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-console.log("Full Axios response:", response);
+      const response = await api.post(
+        "/api/ai/remove-image-background",
+        formData,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log("Full Axios response:", response);
 
-    toast.dismiss();
+      toast.dismiss();
 
-    if (response.data.success) {
-      setContent(response.data.content);
-      setInput(null);
-      toast.success("Background removed successfully 🎉");
-    } else {
-      toast.error(response.data.message || "Something went wrong");
+      if (response.data.success) {
+        setContent(response.data.content);
+        setInput(null);
+        toast.success("Background removed successfully 🎉");
+      } else {
+        toast.error(response.data.message || "Something went wrong");
+      }
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Something went wrong. Please try again.");
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    toast.dismiss();
-    toast.error("Something went wrong. Please try again.");
-    console.error(error);
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <>

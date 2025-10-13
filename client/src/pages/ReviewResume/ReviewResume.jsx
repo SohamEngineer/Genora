@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { FileText, Sparkles } from "lucide-react";
 import toast from "react-hot-toast";
-import axios from 'axios';
 import { useAuth } from "@clerk/clerk-react";
 import Markdown from "react-markdown";
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
+import api from "../../api";
 
 function ReviewResume() {
   // State for storing uploaded file
   const [input, setInput] = useState(null);
   const [content, setContent] = useState("");
-  // State for loading spinner
   const [loading, setLoading] = useState(false);
-
   const { getToken } = useAuth();
-
   useEffect(() => {
     setContent("");
   }, [])
@@ -32,7 +28,7 @@ function ReviewResume() {
 
    const token = await getToken();
 
-      const response = await axios.post(
+      const response = await api.post(
         "/api/ai/resume-review",
         formData,
         { headers: { Authorization: `Bearer ${token}` } }

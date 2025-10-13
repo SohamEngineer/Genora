@@ -4,8 +4,7 @@ import Markdown from "react-markdown";
 import BLOG_CATEGORIES from "../../data/blogCatagore";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/clerk-react";
-import axios from "axios";
-
+import api from "../../api";
 function Blog() {
   /* -------------------- State -------------------- */
   const [selectedCategory, setSelectedCategory] = useState(BLOG_CATEGORIES[0]);
@@ -15,7 +14,6 @@ function Blog() {
   const { getToken } = useAuth();
 
   /* -------------------- Handlers -------------------- */
-  axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -26,7 +24,7 @@ function Blog() {
       const prompt = `Write a blog about ${topic} in category ${selectedCategory}`;
 
       const token = await getToken();
-      const response = await axios.post(
+      const response = await api.post(
         "/api/ai/generate-blog",
         { prompt, category: selectedCategory },
         { headers: { Authorization: `Bearer ${token}` } }

@@ -2,18 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Scissors, Sparkles } from 'lucide-react'
 import { useAuth } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
+import api from '../../api';
 
 function RemoveObject() {
   // State to store uploaded file
   const [input, setInput] = useState(null);
-
   // State to store user text description (object to remove)
   const [object, setObject] = useState('');
   const [loading, setLoading] = useState(false);
   const [content, setContent] = useState(""); // Generated image URL
-
   const { getToken } = useAuth();
 
 
@@ -38,7 +35,7 @@ function RemoveObject() {
 
       const token = await getToken();
 
-      const response = await axios.post(
+      const response = await api.post(
         "/api/ai/remove-image-object",
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
@@ -127,19 +124,19 @@ function RemoveObject() {
           </div>
           {
             !content ?
-            (
-              <div className="flex-1 flex justify-center items-center fade-in-up fade-delay-9">
-            <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
-              <Scissors className="w-9 h-9" />
-              <p>Upload an image and click "Remove Object" to get started</p>
-            </div>
-          </div>
-            )
-            :
-            (
-              <img src={content} className='mt-3 w-full h-full'/>
-            )
-          }          
+              (
+                <div className="flex-1 flex justify-center items-center fade-in-up fade-delay-9">
+                  <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
+                    <Scissors className="w-9 h-9" />
+                    <p>Upload an image and click "Remove Object" to get started</p>
+                  </div>
+                </div>
+              )
+              :
+              (
+                <img src={content} className='mt-3 w-full h-full' />
+              )
+          }
         </div>
       </div>
     </>

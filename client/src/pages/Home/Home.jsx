@@ -1,7 +1,7 @@
 import React from 'react'
 import NavBar from '../../components/core/NavBar'
 import Hero from '../../components/core/Hero'
-import AiTool from '../../components/core/AiTool'
+import AiTool from '../../components/core/aiTool'
 import { Testimonial } from '../../components/Testimonial'
 import testimonials from '../../data/Testimonial'
 import people from "../../data/people"
@@ -14,7 +14,7 @@ function Home() {
     <>
       <NavBar />
       <Hero people={people} words={words} />
-      <AiTool />
+      <AiTool/>
       <Testimonial testimonials={testimonials} />
       <Plan />
       <Footer />
