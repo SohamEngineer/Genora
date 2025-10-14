@@ -7,7 +7,7 @@ export const resumeReview = async (req, res) => {
   try {
     const { userId } = req.auth();
     const resume = req.file;
-
+    const plan=req.plan;
     if (!resume) {
       return res.status(400).json({ success: false, message: "No resume file uploaded." });
     }
@@ -15,6 +15,12 @@ export const resumeReview = async (req, res) => {
       return res.json({
         success: false,
         message: "Resume file size exceeds allowed size (5MB).",
+      });
+    }
+    if(plan !='subscription'){
+      return res.status(403).json({
+        success: false,
+        message: "Upgrade to a subscription to use this feature",
       });
     }
     const dataBuffer = fs.readFileSync(resume.path);

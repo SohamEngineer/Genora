@@ -1,8 +1,6 @@
 import sql from "../../config/db.js";
 import { clerkClient } from "@clerk/express";
 import AI from "../../config/aiClient.js";
-
-
 export const generateArtical=async (req ,res)=>{
     try {
         const {userId}=req.auth();
@@ -10,7 +8,7 @@ export const generateArtical=async (req ,res)=>{
         const plan =req.plan;
         const free_usage=req.free_usage;
 
-        if(plan !='premium' && free_usage>=10){
+        if(plan !='subscription' && free_usage>=10){
             return res.json({
                 success:false,
                 message:"You can reach your limit"
@@ -35,7 +33,7 @@ const content=response.choices[0].message.content;
     await sql`INSERT INTO usercreations (userId , prompt , content ,type)
     VALUES(${userId},${prompt},${content},'article')`;
 
-    if(plan !="premium"){
+    if(plan !="subscription"){
         await clerkClient.users.updateUserMetadata(userId,{
             privateMetadata:{
                 free_usage:free_usage+1

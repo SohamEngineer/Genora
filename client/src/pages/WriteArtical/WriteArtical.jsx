@@ -32,18 +32,20 @@ function WriteArtical() {
         { prompt, length: selectedLength.length },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
-      console.log('API Response:', response.data);
-
       setContent(response.data.content || response.data.article || '');
       setInput(''); // clear the input after submit
 
-      toast.dismiss();
-      toast.success('Article generated successfully 🎉');
+      if (response.data.success) {
+        setContent(response.data.content);
+
+        setInput(null);
+        toast.success("Article Generate Successfully 🎉");
+      } else {
+        toast.error(response.data.message || "Something went wrong");
+      }
     } catch (error) {
       toast.dismiss();
-      toast.error('Something went wrong. Please try again.');
-      console.error(error);
+      toast.error('Something went wrong. Please try again.',error);
     } finally {
       setLoading(false);
     }

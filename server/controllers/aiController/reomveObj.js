@@ -8,12 +8,19 @@ export const objectRemover = async (req, res) => {
     const { userId } = req.auth();
     const { object } = req.body;
     const  image = req.file;
+        const plan=req.plan;
      if (!image) {
       return res.status(400).json({ success: false, message: "No image uploaded" });
     }  
 
      if (!object) {
       return res.status(400).json({ success: false, message: "Object description required" });
+    }
+    if(plan !='subscription'){
+      return res.status(403).json({
+        success: false,
+        message: "Upgrade to a subscription to use this feature",
+      });
     }
 
     // Upload to Cloudinary

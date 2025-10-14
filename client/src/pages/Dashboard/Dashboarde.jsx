@@ -7,9 +7,9 @@ import toast from 'react-hot-toast';
 import api from '../../api';
 function Dashboarde() {
   const [creations, setCreations] = useState([]);
-  const [loading,setLoading]=useState(false)
-  const {getToken}=useAuth();
-  
+  const [loading, setLoading] = useState(false)
+  const { getToken } = useAuth();
+
   const getDashboardData = async () => {
     setLoading(true);
     toast.loading("Generating Creations");
@@ -17,26 +17,26 @@ function Dashboarde() {
     try {
       const token = await getToken();
       const { data } = await api.get("/api/user/getuserCreation", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    toast.dismiss()
-    if (data.success) setCreations(data.creations);
-  } catch (error) {
-      toast.error("somthing error in the api",error);
-  }finally{
-    setLoading(false)
-  }
-};
-useEffect(() => {
-  getDashboardData();
-}, [])
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      toast.dismiss()
+      if (data.success) setCreations(data.creations);
+    } catch (error) {
+      toast.error("somthing error in the api", error);
+    } finally {
+      setLoading(false)
+    }
+  };
+  useEffect(() => {
+    getDashboardData();
+  }, [])
   return (
     <>
       {/* Animated black gradient background */}
       {loading ? (
-<div className="flex justify-center items-center h-screen">
-  <div className="w-15 h-15 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-</div>
+        <div className="flex justify-center items-center h-screen">
+          <div className="w-15 h-15 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
       ) : (
         // Dashboard content with fade-in animation
         <div className='w-full h-full overflow-y-scroll p-6 text-white fade-in-up' style={{ position: 'relative', zIndex: 1 }}>

@@ -22,11 +22,8 @@ function RemoveBackground() {
     try {
       setLoading(true);
       toast.loading("Generating image...");
-
       const formData = new FormData();
       formData.append('image', input);
-
-
       const token = await getToken();
 
       const response = await api.post(
@@ -57,7 +54,7 @@ function RemoveBackground() {
   return (
     <>
       <div className="animated-bg"></div>
-      <div className="h-full overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-light fade-in-up ">
+      <div className="h-full overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-white fade-in-up ">
         {/* LEFT COLUMN (Upload Form) */}
         <form
           onSubmit={onSubmitHandler}
@@ -73,9 +70,9 @@ function RemoveBackground() {
             type="file"
             accept="image/*"
             onChange={(e) => setInput(e.target.files[0])}
-            className="w-full py-3 px-3 outline-none text-sm rounded-md border border-gray-300 cursor-pointer text-gray-600 fade-in-up fade-delay-3"
+            className="w-full py-3 px-3 outline-none text-sm rounded-md border  border-gray-300 cursor-pointer text-gray-600 fade-in-up fade-delay-3"
           />
-          <label className="text-xs text-gray-500 fade-in-up fade-delay-4">
+          <label className="text-xs text-stone-300 fade-in-up fade-delay-4">
             Supports JPG, PNG, and other image formats
           </label>
 
@@ -108,7 +105,7 @@ function RemoveBackground() {
                 className="max-h-[500px] max-w-full object-contain rounded-lg shadow-md"
               />
             ) : (
-              <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
+              <div className="text-sm flex flex-col items-center gap-5 text-stone-300">
                 <Eraser className="w-9 h-9" />
                 <p>Upload an image and click "Remove Background" to get started</p>
               </div>

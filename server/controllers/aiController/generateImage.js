@@ -7,7 +7,13 @@ export const generateImage = async (req, res) => {
   try {
     const { userId } = req.auth();
     const { prompt, publish } = req.body;
-
+        const plan=req.plan;
+    if (plan != 'subscription') {
+      return res.status(403).json({
+        success: false,
+        message: "Upgrade to a subscription to use this feature",
+      });
+    }
     // ClipDrop API request
     const formData = new FormData();
     formData.append("prompt", prompt);

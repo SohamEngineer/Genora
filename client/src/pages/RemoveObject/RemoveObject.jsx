@@ -40,7 +40,7 @@ function RemoveObject() {
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log("Full Axios response:", response);
+      // console.log("Full Axios response:", response);
 
       toast.dismiss();
 

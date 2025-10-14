@@ -57,7 +57,7 @@ function GenerateImage() {
       {/* Animated black gradient background */}
       <div className="animated-bg"></div>
 
-      <div className="h-full overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-light fade-in-up">
+      <div className="h-full overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-white fade-in-up">
         {/* ---------------- Left Column (Form) ---------------- */}
         <form
           onSubmit={onSubmitHandler}
@@ -78,7 +78,7 @@ function GenerateImage() {
             value={input}
             rows={4}
             placeholder="Describe what you want to see in the image.."
-            className="w-full py-3 px-3 outline-none text-sm rounded-md border border-gray-300 fade-in-up fade-delay-3"
+            className="w-full py-3 px-3 outline-none text-sm rounded-md border placeholder:text-stone-300 border-gray-300 fade-in-up fade-delay-3"
           />
 
           {/* Select: Style */}
@@ -92,8 +92,8 @@ function GenerateImage() {
                 onClick={() => setSelectStyle(item)}
                 className={`text-sm border rounded-full px-4 py-2 cursor-pointer transition fade-in-up fade-delay-5
                   ${selectStyle === item
-                    ? "bg-gradient-to-l from-[#e4920f] to-[#45FCA7] text-white"
-                    : "text-gray-500 border-gray-300"
+                    ? "bg-gradient-to-l  from-[#02aa13] to-[#ccbb02] text-white"
+                    : "text-stone-300 border-gray-300"
                   }`}
               >
                 {item}
@@ -111,7 +111,7 @@ function GenerateImage() {
                 className="sr-only peer"
               />
               {/* Track */}
-              <div className="w-9 h-5 bg-slate-300 rounded-full peer-checked:bg-green-500 transition"></div>
+              <div className="w-9 h-5 bg-slate-500 rounded-full peer-checked:bg-green-500 transition"></div>
               {/* Knob */}
               <span
                 className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition 
@@ -127,7 +127,7 @@ function GenerateImage() {
           <button
             disabled={loading || !input}
             className="w-full flex justify-center items-center gap-2 
-              bg-gradient-to-r from-[#FD1D1D] to-[#45FCA7] text-white 
+              bg-gradient-to-r from-[#02aa13] to-[#ccbb02] text-white 
               px-4 py-2 text-sm rounded-lg cursor-pointer disabled:opacity-70 fade-in-up fade-delay-8"
           >
             {/* Loader or Icon */}

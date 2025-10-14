@@ -35,7 +35,7 @@ const content=response.choices[0].message.content;
     await sql`INSERT INTO usercreations (userId , prompt , content ,type)
     VALUES(${userId},${prompt},${content},'blog-title')`;
 
-    if(plan !="premium"){
+    if(plan !="subscription"){
         await clerkClient.users.updateUserMetadata(userId,{
             privateMetadata:{
                 free_usage:free_usage+1

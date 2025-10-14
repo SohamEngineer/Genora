@@ -1,23 +1,18 @@
 import logo from "./logo.png";
-import gradientBackground from "./gradientBackground.png";
 import user_group from "./user_group.png";
 import star_icon from "./star_icon.svg";
 import star_dull_icon from "./star_dull_icon.svg";
 import profile_img_1 from "./profile_img_1.png";
-import arrow_icon from "./arrow_icon.svg";
 import { SquarePen, Hash, Image, Eraser, Scissors, FileText } from 'lucide-react'
-import ai_gen_img_1 from "./ai_gen_img_1.png";
-import ai_gen_img_2 from "./ai_gen_img_2.png";
-import ai_gen_img_3 from "./ai_gen_img_3.png";
+import p1 from "./p1.jpg"
 
 export const assets = {
     logo,
-    gradientBackground,
     user_group,
     star_icon,
     star_dull_icon,
     profile_img_1,
-    arrow_icon,
+    p1
 };
 
 export const AiToolsData = [
@@ -127,47 +122,3 @@ export const dummyCreationData = [
 ]
 
 
-export const dummyPublishedCreationData = [
-    {
-        "id": 1,
-        "user_id": "user_2yMX02PRbyMtQK6PebpjnxvRNIA",
-        "prompt": "Generate an image of A Boy is on Boat , and fishing in the style Anime style.",
-        "content": ai_gen_img_1,
-        "type": "image",
-        "publish": true,
-        "likes": [
-            "user_2yMX02PRbyMtQK6PebpjnxvRNIA",
-            "user_2yaW5EHzeDfQbXdAJWYFnZo2bje"
-        ],
-        "created_at": "2025-06-19T09:02:25.035Z",
-        "updated_at": "2025-06-19T09:58:37.552Z",
-    },
-    {
-        "id": 2,
-        "user_id": "user_2yMX02PRbyMtQK6PebpjnxvRNIA",
-        "prompt": "Generate an image of A Boy Riding a bicycle on road and bicycle is from year 2201  in the style Anime style.",
-        "content": ai_gen_img_2,
-        "type": "image",
-        "publish": true,
-        "likes": [
-            "user_2yMX02PRbyMtQK6PebpjnxvRNIA",
-            "user_2yaW5EHzeDfQbXdAJWYFnZo2bje"
-        ],
-        "created_at": "2025-06-19T08:16:54.614Z",
-        "updated_at": "2025-06-19T09:58:40.072Z",
-    },
-    {
-        "id": 3,
-        "user_id": "user_2yaW5EHzeDfQbXdAJWYFnZo2bje",
-        "prompt": "Generate an image of a boy riding a car on sky in the style Realistic.",
-        "content": ai_gen_img_3,
-        "type": "image",
-        "publish": true,
-        "likes": [
-            "user_2yaW5EHzeDfQbXdAJWYFnZo2bje"
-        ],
-        "created_at": "2025-06-23T11:29:23.351Z",
-        "updated_at": "2025-06-23T11:29:44.434Z",
-        "__v": 1
-    },
-]
