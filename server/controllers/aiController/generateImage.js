@@ -7,7 +7,7 @@ export const generateImage = async (req, res) => {
   try {
     const { userId } = req.auth();
     const { prompt, publish } = req.body;
-        const plan=req.plan;
+    const plan=req.plan;
     if (plan != 'subscription') {
       return res.status(403).json({
         success: false,
