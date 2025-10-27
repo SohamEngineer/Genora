@@ -10,24 +10,27 @@ function Dashboarde() {
   const [loading, setLoading] = useState(false)
   const { getToken } = useAuth();
 
-  const getDashboardData = async () => {
-    setLoading(true);
-    toast.loading("Generating Creations");
-
-    try {
-      const token = await getToken();
-      const { data } = await api.get("/api/user/getuserCreation", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      toast.dismiss()
-      if (data.success) setCreations(data.creations);
-    } catch (error) {
-      toast.error("somthing error in the api", error);
-    } finally {
-      setLoading(false)
-    }
-  };
   useEffect(() => {
+    const getDashboardData = async () => {
+      setLoading(true);
+      toast.loading("Generating Creations");
+
+      try {
+        const token = await getToken();
+        const data  = await api.get("/api/user/getuserCreation", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        // console.log(token);
+        
+        toast.dismiss()
+        if (data.success) setCreations(data.creations);
+      } catch (error) {
+        toast.error("somthing error in the api", error);
+      } finally {
+        setLoading(false)
+      }
+    };
+
     getDashboardData();
   }, [])
   return (

@@ -1,26 +1,27 @@
 
 const words = [
   {
-    text: "Build ",
+    text: "Create ",
     className: "text-white",
   },
   {
-    text: "awesome ",
+    text: "Amazing ",
     className: "text-white",
   },
   {
-    text: "apps ",
-    className: "text-white",
-
-  },
-  {
-    text: "with ",
+    text: "Content ",
     className: "text-white",
 
   },
   {
-    text: "Aceternity.",
+    text: "With  ",
+    className: "text-white",
+
+  },
+  {
+    text: "AI.",
     className: "text-blue-500 dark:text-blue-500",
   },
+  
 ];
 export default words;

@@ -32,6 +32,7 @@ function WriteArtical() {
         { prompt, length: selectedLength.length },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      toast.dismiss();
       setContent(response.data.content || response.data.article || '');
       setInput(''); // clear the input after submit
 
@@ -40,6 +41,7 @@ function WriteArtical() {
 
         setInput(null);
         toast.success("Article Generate Successfully 🎉");
+        
       } else {
         toast.error(response.data.message || "Something went wrong");
       }

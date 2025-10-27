@@ -11,6 +11,7 @@ import GenerateImage from './pages/generateImages/generateImage'
 import Layout from './pages/layout/layout'
 import Home from './pages/home/home'
 import {Toaster} from 'react-hot-toast'
+import { Prac } from './pages/prac'
 
 const App = () => {
   return (
@@ -21,7 +22,9 @@ const App = () => {
       
       <Route path="/ai" element={<Layout />}>
         <Route index element={<Dashboarde />} />
+
         <Route path='blog-titles' element={<Blog />} />
+        <Route path='title' element={<Prac />} />
         <Route path='community' element={<Community />} />
         <Route path='generate-images' element={<GenerateImage />} />
         <Route path='remove-background' element={<RemoveBackground />} />
