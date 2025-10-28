@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useAuth, useUser } from "@clerk/clerk-react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import ImageCard from "../../components/imageCard";
 import api from "../../api";
@@ -13,7 +12,6 @@ function Community() {
   const { getToken } = useAuth();
   const [hovered, setHovered] = useState(null);
 
-  axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
   // ✅ Fetch all community creations
   const getCommunity = async () => {
@@ -21,7 +19,7 @@ function Community() {
     const toastId = toast.loading("Loading community creations...");
     try {
       const token = await getToken();
-      const { data } = await axios.get("/api/user/getuserPublication", {
+      const { data } = await api.get("/api/user/getuserPublication", {
         headers: { Authorization: `Bearer ${token}` },
       });
 

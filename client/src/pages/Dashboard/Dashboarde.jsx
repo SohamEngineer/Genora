@@ -17,10 +17,10 @@ function Dashboarde() {
 
       try {
         const token = await getToken();
-        const data  = await api.get("/api/user/getuserCreation", {
+        const { data } = await api.get("/api/user/getuserCreation", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        // console.log(token);
+        console.log(data.creations);
         
         toast.dismiss()
         if (data.success) setCreations(data.creations);

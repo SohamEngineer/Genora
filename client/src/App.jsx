@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Blog from './pages/blog/blog'
-import Dashboarde from './pages/dashboard/dashboarde'
 import RemoveBackground from './pages/removeBackground/removeBackground'
 import RemoveObject from './pages/removeObject/removeObject'
 import ReviewResume from './pages/reviewResume/reviewResume'
@@ -11,7 +10,7 @@ import GenerateImage from './pages/generateImages/generateImage'
 import Layout from './pages/layout/layout'
 import Home from './pages/home/home'
 import {Toaster} from 'react-hot-toast'
-import { Prac } from './pages/prac'
+import Dashboarde from './pages/dashboard/Dashboarde'
 
 const App = () => {
   return (
