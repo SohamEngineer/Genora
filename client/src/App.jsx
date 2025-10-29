@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Layout from './pages/layout/layout'
 import Home from './pages/home/home'
 import {Toaster} from 'react-hot-toast'
 import Dashboarde from './pages/dashboard/Dashboarde'
@@ -11,6 +10,7 @@ import RemoveBackground from './pages/removeBackground/removeBackground'
 import RemoveObject from './pages/removeObject/removeObject'
 import ReviewResume from './pages/reviewResume/reviewResume'
 import WriteArtical from './pages/writeArtical/WriteArtical'
+import Layout from './pages/layout/layout'
 
 const App = () => {
   return (
