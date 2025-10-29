@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Blog from './pages/blog/Blog'
+// import Blog from './pages/blog/Blog'
 import RemoveBackground from './pages/removeBackground/removeBackground'
 import RemoveObject from './pages/removeObject/removeObject'
 import ReviewResume from './pages/reviewResume/reviewResume'
