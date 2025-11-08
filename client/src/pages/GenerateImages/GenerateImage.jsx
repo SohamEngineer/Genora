@@ -141,7 +141,7 @@ function GenerateImage() {
         </form>
 
         {/* ---------------- Right Column (Output Preview) ---------------- */}
-        <div className="w-full max-w-lg p-4 rounded-lg flex flex-col border border-gray-300 min-h-96 max-h-[600px]">
+        <div className="w-full max-w-3xl p-4 rounded-lg flex flex-col border border-gray-300 min-h-96 max-h-[600px]">
           {/* Title */}
           <div className="flex items-center gap-3 fade-in-up fade-delay-6">
             <Image className="w-6 h-6 text-[#e4920f]" />
