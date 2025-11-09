@@ -13,7 +13,7 @@ export const auth = async (req, res, next) => {
     }
 
     // Check plan
-    const hasPremiumPlan = has({ plan: "premium" });
+    const hasPremiumPlan = has({ plan: "subscription" });
 
     // Fetch user
     const user = await clerkClient.users.getUser(userId);
@@ -30,7 +30,7 @@ export const auth = async (req, res, next) => {
     }
 
     // Attach plan info to request
-    req.plan = hasPremiumPlan ? "premium" : "free";
+    req.plan = hasPremiumPlan ? "subscription" : "free";
 
     next();
   } catch (error) {
