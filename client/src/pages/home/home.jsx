@@ -7,7 +7,7 @@ import people from "../../data/people"
 import words from '../../data/word'
 import Plan from '../../components/core/Plan'
 import Footer from '../../components/core/footer'
-import  Testimonial  from '../../components/Testimonial'
+import  {Testimonial}  from '../../components/testimonial'
 
 function Home() {
   return (
