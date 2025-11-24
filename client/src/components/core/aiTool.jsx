@@ -2,7 +2,7 @@ import React from 'react'
 import { AiToolsData } from '../../assets/assets'
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
-import { CardSpotlight } from '../Spotlight';
+import { CardSpotlight } from '../spotlight';
 
 const AiTool = () => {
   const navigate = useNavigate();
