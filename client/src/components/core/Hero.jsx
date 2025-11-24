@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimatedTooltip } from '../groupuser';
-import { Boxes } from '../Boxes'; // <- import Boxes
+import { Boxes } from '../boxes'; // <- import Boxes
 import { TypewriterEffectSmooth } from '../TypewriterText';
 import {useNavigate} from "react-router-dom";
 
