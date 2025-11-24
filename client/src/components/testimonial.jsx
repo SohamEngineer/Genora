@@ -1,5 +1,5 @@
 import React from "react";
-import { CardSpotlight } from "./Spotlight";
+import { CardSpotlight } from "./spotlight";
 
 const StarIcon = () => (
   <svg
