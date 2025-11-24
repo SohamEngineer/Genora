@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { cn } from "../lib/utils";
-import { Heart } from "lucide-react";
+import { Download, Heart } from "lucide-react";
 
 const ImageCard = React.memo(({ card, index, hovered, setHovered, user, toggleLike }) => (
   <div
@@ -30,7 +30,9 @@ const ImageCard = React.memo(({ card, index, hovered, setHovered, user, toggleLi
         {card.prompt}
       </p>
 
+      <div className="flex items-center justify-between ">
       <div className="flex items-center gap-2">
+
         <p className="text-sm text-gray-300">{card.likes?.length || 0}</p>
         <Heart
           onClick={() => toggleLike(card.id)}
@@ -41,6 +43,8 @@ const ImageCard = React.memo(({ card, index, hovered, setHovered, user, toggleLi
               : "text-gray-200"
           )}
         />
+      </div>
+        <div className="c"><Download/></div>
       </div>
     </div>
   </div>
