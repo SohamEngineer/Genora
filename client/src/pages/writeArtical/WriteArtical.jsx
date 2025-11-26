@@ -113,7 +113,7 @@ function WriteArtical() {
         </form>
 
         {/* Right col */}
-        <div className="w-full max-w-2xl p-4 rounded-lg flex  border border-gray-300 min-h-96 max-h-full">
+        <div className="w-full max-w-2xl p-4 rounded-lg flex flex-col  border border-gray-300 min-h-96 max-h-full">
           <div className="flex items-center gap-3">
             <Edit className="w-6 h-6 text-[#4A7AFF]" />
             <h1 className="text-xl font-semibold">Generated Article</h1>

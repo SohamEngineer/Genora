@@ -116,7 +116,7 @@ function RemoveObject() {
         </form>
 
         {/* ---------- RIGHT COLUMN (Processed Output) ---------- */}
-        <div className="w-full max-w-2xl p-4  rounded-lg flex  border border-gray-300 min-h-96 max-h-[600px]">
+        <div className="w-full max-w-2xl p-4  rounded-lg flex flex-col border border-gray-300 min-h-96 max-h-[600px]">
           {/* Header */}
           <div className="flex items-center gap-3 fade-in-up fade-delay-8">
             <Scissors className="w-6 h-6 text-[#e4920f]" />
